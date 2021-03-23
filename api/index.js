@@ -1,12 +1,14 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 const { config } = require("./config");
 
 const app = express();
 
 // middlewares
 // app.use(bodyParser.json())
+app.use(cors())
 app.use(express.json());
 
 // endpoints
