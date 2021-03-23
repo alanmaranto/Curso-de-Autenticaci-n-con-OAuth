@@ -6,6 +6,14 @@ const { config } = require("./config");
 
 const app = express();
 
+// prod only 
+/* const corsOptions = {
+  origin: "http://yourclientside.con"
+}
+
+app.use(cors(corsOptions)); */
+
+
 // middlewares
 // app.use(bodyParser.json())
 app.use(cors())
