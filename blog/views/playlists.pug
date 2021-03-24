@@ -14,9 +14,10 @@ block content
       each playlist in playlists.items
         .column.is-one-quarters
           .card
-            .card-image
-              figure.image
-                img(src=playlist.images[0].url)
+            if playlist.images[0]
+              .card-image
+                figure.image
+                  img(src=playlist.images[0].url)
             .card-content
               h1.title= playlist.name
               h2.subtitle= playlist.owner.display_name
