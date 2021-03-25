@@ -8,7 +8,7 @@ export default class AuthService {
   constructor() {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
-    this.handleAuthentication = this.bind.handleAuthentication.bind(this);
+    this.handleAuthentication = this.handleAuthentication.bind(this);
     this.isAuthenticated = this.isAuthenticated.bind(this);
     this.getProfile = this.getProfile.bind(this);
   }
@@ -39,14 +39,14 @@ export default class AuthService {
       const { access_token, state } = getHashParams();
       const auth_state = localStorage.getItem("auth_state");
 
-      if (state === null || state !== auth.state) {
+      if (state === null || state !== auth_state) {
         reject(new Error("The state doesn't match"));
       }
 
       localStorage.removeItem("auth_state");
 
       if (access_token) {
-        this.setSession({ access_token });
+        this.setSession({ accessToken :access_token });
         return resolve(access_token);
       } else {
         return reject(new Error("The token is invalid"));
@@ -70,7 +70,7 @@ export default class AuthService {
     return new Date().getTime() < expiresAt;
   }
 
-  handleUserInfo() {
+  handleUserInfo(accessToken) {
     const headers = {
       Authorization: `Bearer ${accessToken}`,
     };
@@ -84,7 +84,7 @@ export default class AuthService {
   }
 
   setProfile(profile) {
-    localStorage.setItem("profile", JSON.stringify(profile()));
+    localStorage.setItem("profile", JSON.stringify(profile));
   }
 
   getProfile() {
